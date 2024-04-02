@@ -9,7 +9,7 @@ namespace Sheeenam.Api.Brokers.Storages
 	{
 		public DbSet<Guest> Guests { get; set; }
 
-		async ValueTask<Guest> InsertGuestAsync(Guest guest)
+		public async ValueTask<Guest> InsertGuestAsync(Guest guest)
 		{
 			using var broker = new StorageBroker(this.configuration);
 
