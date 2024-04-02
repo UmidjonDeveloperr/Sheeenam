@@ -3,12 +3,9 @@
 //Free To Use To Find Comfort and Peace 
 //================================================
 
-namespace Sheeenam.Api.Models.Foundations.Guests
+namespace Sheeenam.Api.Brokers.Storages
 {
-	public enum GenderType
+	public partial interface IStorageBroker
 	{
-		Male,
-		Female,
-		Other
 	}
 }

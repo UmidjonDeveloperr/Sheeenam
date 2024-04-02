@@ -1,4 +1,9 @@
-﻿using System;
+﻿//================================================
+//Copiright(c) Coalition of Good-Hearted Engineers
+//Free To Use To Find Comfort and Peace 
+//================================================
+
+using System;
 
 namespace Sheeenam.Api.Models.Foundations.Guests
 {
