@@ -1,4 +1,3 @@
-﻿
 using Sheeenam.Api.Models.Foundations.Guests;
 using System.Threading.Tasks;
 
