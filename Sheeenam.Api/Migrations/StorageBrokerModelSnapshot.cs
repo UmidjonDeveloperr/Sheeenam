@@ -1,8 +1,3 @@
-﻿//================================================
-//Copyright(c) Coalition of Good-Hearted Engineers
-//Free to Use To Find Comfort and Peace
-//================================================
-
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;

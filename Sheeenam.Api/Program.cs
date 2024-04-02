@@ -1,7 +1,3 @@
-//================================================
-//Copyright(c) Coalition of Good-Hearted Engineers
-//Free to Use To Find Comfort and Peace
-//================================================
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
