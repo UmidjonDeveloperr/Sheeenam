@@ -5,6 +5,7 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheeenam.Api", "Sheeenam.Api\Sheeenam.Api.csproj", "{24505879-D0A9-4414-8287-3DCDBE6EA2E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheeenam.Api.Tests.xUnit", "Sheeenam.Api.Tests.xUnit\Sheeenam.Api.Tests.xUnit.csproj", "{D5606271-AF05-468D-9D8D-47EBAAFBC81E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,6 +17,10 @@ Global
 		{24505879-D0A9-4414-8287-3DCDBE6EA2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24505879-D0A9-4414-8287-3DCDBE6EA2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24505879-D0A9-4414-8287-3DCDBE6EA2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5606271-AF05-468D-9D8D-47EBAAFBC81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5606271-AF05-468D-9D8D-47EBAAFBC81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5606271-AF05-468D-9D8D-47EBAAFBC81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5606271-AF05-468D-9D8D-47EBAAFBC81E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
