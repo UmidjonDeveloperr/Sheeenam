@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tynamix.ObjectFiller;
 using Xunit;
 
 namespace Sheeenam.Api.Tests.xUnit.Services.Foundations.Guests
@@ -25,27 +26,20 @@ namespace Sheeenam.Api.Tests.xUnit.Services.Foundations.Guests
                 new GuestService(storageBroker: this.storageBrokerMock.Object);
         }
 
-        [Fact]
-        public async Task ShouldAddGuestAsync()
+        private static Guest CreateRandomGuest() =>
+                CreateGuestFiller(date: GetRandomDateTimeOffset()).Create();
+
+        private static DateTimeOffset GetRandomDateTimeOffset() =>
+            new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
+        private static Filler<Guest> CreateGuestFiller(DateTimeOffset date)
         {
-            Guest randomGuest = new Guest()
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Alex",
-                LastName = "Doe",
-                Address = "Brooks Str. #12",
-                DateOfBirthday = new DateTimeOffset(),
-                Email = "random@gmail.com",
-                Gender = GenderType.Male,
-                PhoneNumber = "1234567890"
-            };
+            var filler = new Filler<Guest>();
 
-            this.storageBrokerMock.Setup(broker =>
-                broker.InsertGuestAsync(randomGuest)).ReturnsAsync(randomGuest);
+            filler.Setup().
+                OnType<DateTimeOffset>().Use(date);
 
-            Guest actual = await this.guestService.AddGuestAsync(randomGuest);
-
-            actual.Should().BeEquivalentTo(randomGuest);
+            return filler;
         }
 
 
