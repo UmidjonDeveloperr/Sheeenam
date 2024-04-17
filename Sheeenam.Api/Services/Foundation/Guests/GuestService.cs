@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sheeenam.Api.Services.Foundation.Guests
 {
-	public class GuestService : IGuestService
+	public partial class GuestService : IGuestService
 	{
 		private readonly IStorageBroker storageBroker;
 		private	readonly ILoggingBroker loggingBroker;
@@ -19,28 +19,13 @@ namespace Sheeenam.Api.Services.Foundation.Guests
 			this.loggingBroker = loggingBroker;
 		}
 
-		public async ValueTask<Guest> AddGuestAsync(Guest guest)
-		{
-			try
+		public ValueTask<Guest> AddGuestAsync(Guest guest) =>
+			TryCatch(async () =>
 			{
-				if(guest is null)
-				{
-					throw new NullGuestException();
-				}
+				ValidateGuestNotNull(guest);
+
 				return await this.storageBroker.InsertGuestAsync(guest);
-			}
-			catch (NullGuestException nullGuestException)
-			{
-				var guestValidationExceptiion =
-					new GuestValidationException(nullGuestException);
-
-				this.loggingBroker.LogError(guestValidationExceptiion);
-
-				throw guestValidationExceptiion;
-			}
-
-			
-		}
+			});
 	}
 	
 }
