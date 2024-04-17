@@ -7,9 +7,11 @@ using Sheeenam.Api.Services.Foundation.Guests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Tynamix.ObjectFiller;
+using Xeptions;
 using Xunit;
 
 namespace Sheeenam.Api.Tests.xUnit.Services.Foundations.Guests
@@ -36,6 +38,14 @@ namespace Sheeenam.Api.Tests.xUnit.Services.Foundations.Guests
 
         private static DateTimeOffset GetRandomDateTimeOffset() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
+        private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedXeption)
+        {
+            return actualException =>
+            actualException.Message == expectedXeption.Message
+            && actualException.InnerException.Message == expectedXeption.InnerException.Message
+            && (actualException.InnerException as Xeption).DataEquals(expectedXeption.InnerException.Data);
+        }
 
         private static Filler<Guest> CreateGuestFiller(DateTimeOffset date)
         {
