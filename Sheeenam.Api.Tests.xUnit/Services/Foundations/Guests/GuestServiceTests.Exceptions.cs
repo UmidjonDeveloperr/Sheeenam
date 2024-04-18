@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using EFxceptions.Models.Exceptions;
+using Microsoft.Data.SqlClient;
 using Moq;
 using Sheeenam.Api.Models.Foundations.Guests;
 using Sheeenam.Api.Models.Foundations.Guests.Exceptions;
@@ -45,6 +46,46 @@ namespace Sheeenam.Api.Tests.xUnit.Services.Foundations.Guests
 			this.loggingBrokerMock.Verify(broker =>
 				broker.LogCritical(It.Is(SameExceptionAs(
 					expectedGuestDependencyException))),
+						Times.Once());
+
+			this.storageBrokerMock.VerifyNoOtherCalls();
+			this.loggingBrokerMock.VerifyNoOtherCalls();
+		}
+
+		[Fact]
+		public async Task ShouldThrowDependencyValidationOnAddIfDublicateKeyErrorOccursAndLogItAsync()
+		{
+			//given
+			Guest someGuest = CreateRandomGuest();
+			string someMessage = GetRandomString();
+
+			var dublicateKeyException =
+				new DuplicateKeyException(someMessage);
+
+			var alreadyExistGuestException =
+				new AlreadyExistGuestException(dublicateKeyException);
+
+			var expectedGuestDependencyValidationException =
+				new GuestDependencyValidationException(alreadyExistGuestException);
+
+			this.storageBrokerMock.Setup(broker =>
+				broker.InsertGuestAsync(someGuest))
+				.ThrowsAsync(dublicateKeyException);
+			//when
+			ValueTask<Guest> addGuestTask =
+				this.guestService.AddGuestAsync(someGuest);
+
+			//then
+			await Assert.ThrowsAsync<GuestDependencyValidationException>(() =>
+				addGuestTask.AsTask());
+
+			this.storageBrokerMock.Verify(broker=>
+				broker.InsertGuestAsync(someGuest), 
+					Times.Once());
+
+			this.loggingBrokerMock.Verify(broker=>
+				broker.LogError(It.Is(SameExceptionAs(
+					expectedGuestDependencyValidationException))),
 						Times.Once());
 
 			this.storageBrokerMock.VerifyNoOtherCalls();
