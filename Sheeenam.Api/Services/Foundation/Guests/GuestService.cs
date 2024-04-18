@@ -22,7 +22,7 @@ namespace Sheeenam.Api.Services.Foundation.Guests
 		public ValueTask<Guest> AddGuestAsync(Guest guest) =>
 			TryCatch(async () =>
 			{
-				throw new System.Exception("Fake Exception");
+				
 				ValidateGuestOnAdd(guest);
 
 				return await this.storageBroker.InsertGuestAsync(guest);
