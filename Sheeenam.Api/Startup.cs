@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Sheeenam.Api.Brokers.Logging;
 using Sheeenam.Api.Brokers.Storages;
+using Sheeenam.Api.Services.Foundation.Guests;
 
 namespace Sheeenam.Api
 {
@@ -25,6 +26,7 @@ namespace Sheeenam.Api
 			services.AddDbContext<StorageBroker>();
 			services.AddControllers();
 			AddBrokers(services);
+			AddFoundationservices(services);
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sheeenam.Api", Version = "v1" });
@@ -58,6 +60,11 @@ namespace Sheeenam.Api
 		{
 			services.AddTransient<IStorageBroker, StorageBroker>();
 			services.AddTransient<ILoggingBroker, LoggingBroker>();
+		}
+
+		private static void AddFoundationservices(IServiceCollection services)
+		{
+			services.AddTransient<IGuestService, GuestService>();
 		}
 	}
 }
