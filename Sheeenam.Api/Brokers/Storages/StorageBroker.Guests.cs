@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Sheeenam.Api.Models.Foundations.Guests;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sheeenam.Api.Brokers.Storages
@@ -24,5 +25,9 @@ namespace Sheeenam.Api.Brokers.Storages
 
 			return guestEntityEntry.Entity;
 		}
+
+		public IQueryable<Guest> SelectAllGuests() =>
+			SelectAll<Guest>();
+
 	}
 }
