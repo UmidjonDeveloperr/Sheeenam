@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Sheeenam.Api.Models.Foundations.Guests;
 using Sheeenam.Api.Models.Foundations.Guests.Exceptions;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xeptions;
 
@@ -10,6 +11,7 @@ namespace Sheeenam.Api.Services.Foundation.Guests
 {
 	public partial class GuestService
 	{
+		private delegate IQueryable<Guest> ReturningGuestsFunction();
 		private delegate ValueTask<Guest> ReturningGuestFunction();
 
 		private async ValueTask<Guest> TryCatch(ReturningGuestFunction returningGuestFunction)
@@ -48,6 +50,27 @@ namespace Sheeenam.Api.Services.Foundation.Guests
 				throw CreateAndLogServiceException(failedGuestServiceException);
 			}
 		}
+
+		private IQueryable<Guest> TryCatch(ReturningGuestsFunction returningGuestsFunction)
+		{
+			try
+			{
+				return returningGuestsFunction();
+			}
+			catch (SqlException sqlException)
+			{
+				var failedGuestServiceException = new FailedGuestServiceException(sqlException);
+
+				throw CreateAndLogCriticalException(failedGuestServiceException);
+			}
+			catch (Exception serviException)
+			{
+				var failedGuestServiceException = new FailedGuestServiceException(serviException);
+
+				throw CreateAndLogServiceException(failedGuestServiceException);
+			}
+		}
+
 
 		private GuestValidationException CreateAndLogValidationException(Xeption exception)
 		{
