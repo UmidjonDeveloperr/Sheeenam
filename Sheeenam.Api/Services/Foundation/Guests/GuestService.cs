@@ -3,6 +3,7 @@ using Sheeenam.Api.Brokers.Storages;
 using Sheeenam.Api.Models.Foundations.Guests;
 using Sheeenam.Api.Models.Foundations.Guests.Exceptions;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sheeenam.Api.Services.Foundation.Guests
@@ -27,6 +28,9 @@ namespace Sheeenam.Api.Services.Foundation.Guests
 
 				return await this.storageBroker.InsertGuestAsync(guest);
 			});
+
+		public IQueryable<Guest> RetrieveAllGuests() =>
+			TryCatch(() => this.storageBroker.SelectAllGuests());
 	}
 	
 }
