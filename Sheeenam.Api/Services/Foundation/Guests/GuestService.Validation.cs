@@ -14,13 +14,13 @@ namespace Sheeenam.Api.Services.Foundation.Guests
 			ValidateGuestNotNull(guest);
 
 			Validate(
-				(Rule: IsInValid(guest.Id), Parametr: nameof(Guest.Id)),
-				(Rule: IsInValid(guest.FirstName), Parametr: nameof(Guest.FirstName)),
-				(Rule: IsInValid(guest.LastName), Parametr: nameof(Guest.LastName)),
-				(Rule: IsInValid(guest.DateOfBirthday), Parametr: nameof(Guest.DateOfBirthday)),
-				(Rule: IsInValid(guest.Email), Parametr: nameof(Guest.Email)),
-				(Rule: IsInValid(guest.Address), Parametr: nameof(Guest.Address)),
-				(Rule: IsInValid(guest.Gender), Parametr: nameof(Guest.Gender))
+				(Rule: IsInValid(guest.Id), Parameter: nameof(Guest.Id)),
+				(Rule: IsInValid(guest.FirstName), Parameter: nameof(Guest.FirstName)),
+				(Rule: IsInValid(guest.LastName), Parameter: nameof(Guest.LastName)),
+				(Rule: IsInValid(guest.DateOfBirthday), Parameter: nameof(Guest.DateOfBirthday)),
+				(Rule: IsInValid(guest.Email), Parameter: nameof(Guest.Email)),
+				(Rule: IsInValid(guest.Address), Parameter: nameof(Guest.Address)),
+				(Rule: IsInValid(guest.Gender), Parameter: nameof(Guest.Gender))
 				);
 		}
 
