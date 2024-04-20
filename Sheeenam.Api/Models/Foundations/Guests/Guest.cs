@@ -13,5 +13,7 @@ namespace Sheeenam.Api.Models.Foundations.Guests
         public string Address { get; set; }
         public GenderType Gender { get; set; }
         public string PhoneNumber { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset UpdatedDate { get; set; }
     }
 }

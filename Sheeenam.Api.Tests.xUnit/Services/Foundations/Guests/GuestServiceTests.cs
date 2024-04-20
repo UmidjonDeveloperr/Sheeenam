@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.Data.SqlClient;
 using Moq;
+using Sheeenam.Api.Brokers.DateTimes;
 using Sheeenam.Api.Brokers.Logging;
 using Sheeenam.Api.Brokers.Storages;
 using Sheeenam.Api.Models.Foundations.Guests;
@@ -22,17 +23,20 @@ namespace Sheeenam.Api.Tests.xUnit.Services.Foundations.Guests
 	{
 		private readonly Mock<IStorageBroker> storageBrokerMock;
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
+        private readonly Mock<IDateTimeBroker> dateTimeBrokerMock;
 		private readonly IGuestService guestService;
 
         public GuestServiceTests()
         {
             this.storageBrokerMock = new Mock<IStorageBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
-            
-            this.guestService = 
+            this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
+
+            this.guestService =
                 new GuestService(
                     storageBroker: this.storageBrokerMock.Object,
-                    loggingBroker: this.loggingBrokerMock.Object);
+                    loggingBroker: this.loggingBrokerMock.Object,
+                    dateTimeBroker: this.dateTimeBrokerMock.Object);
         }
 
         private static Guest CreateRandomGuest() =>
