@@ -1,10 +1,13 @@
 using EFxceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Sheeenam.Api.Models.Foundations.Guests;
 using System.Configuration.Internal;
+using System.Linq;
 
 namespace Sheeenam.Api.Brokers.Storages
 {
+
 	public partial class StorageBroker : EFxceptionsContext, IStorageBroker
 	{
 		private readonly IConfiguration configuration;
@@ -24,6 +27,13 @@ namespace Sheeenam.Api.Brokers.Storages
 		}
 
 		public override void Dispose() { }
+
+		private IQueryable<T> SelectAll<T>() where T : class
+		{
+			var broker = new StorageBroker(this.configuration);
+
+			return broker.Set<T>();
+		}
 
 	}
 }
